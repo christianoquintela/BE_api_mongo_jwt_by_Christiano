@@ -10,3 +10,5 @@ routes.get('/', (req, res) => {
     msg: 'Bem vindo a routes no endpoint /',
   });
 });
+
+export default routes;

@@ -53,6 +53,7 @@ Services: Toda a lógica do servidor(checagem antes de salvar no servidor).
 - Design patterns _MSC(model service controller)_
 
 1. FE. envia a requisição para o BE.
+
 2. chega no Controller; **(Transporte)**
 3. Controller manda para o Services; **(Service)**
 4. Services manda para o Models; **(Storage)**
