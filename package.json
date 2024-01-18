@@ -1,7 +1,7 @@
 {
   "name": "backend_api_node_mongo_jwt",
   "version": "1.0.0",
-  "description": "Mais uma api JWT+mMngodb+Nodejs",
+  "description": "Mais uma api JWT + Mngodb_Atlas + Nodejs",
   "main": "src/server.js",
   "type": "module",
   "scripts": {
