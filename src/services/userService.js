@@ -5,7 +5,7 @@ import {
   deleteUser,
 } from '../models/userModels.js';
 
-//Buscando todos os usuários no banco de dados.
+//Buscando todos os usuários no banco de dados. Finalizado.
 const todos = async () => {
   return getAllM()
     .then((res) => {
@@ -15,8 +15,7 @@ const todos = async () => {
       console.log(err);
     });
 };
-
-//Criando usuários
+//Criando usuários - Finalizado.
 const criar = async (name, email, password) => {
   return userExists(email)
     .then((result) => {
@@ -51,6 +50,9 @@ const criar = async (name, email, password) => {
   // console.log(user);
 };
 
+/* 
+Iniciar a implementação do delete conforme documentação mongoose.
+*/
 const deletar = (id) => {
   const email = null;
   const usuario = userExists(email, id);

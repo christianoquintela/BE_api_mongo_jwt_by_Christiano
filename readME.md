@@ -1,19 +1,29 @@
 # Aprendendo mais coisas do universo DEV.
+projeto iniciado através de tutorial no youtube, contudo devido a algumas divergências
+de entendimento e mudanças na syntax do mongoose, decidi refatorar e fazer as 
+mudanças de acordo com meu entendimento da documentação oficial.
+Qualquer erro de lógica, má implementação ou uso errado dos conceitos, fiquem a 
+vontade para sugerir alterações!!!
+Vamos que vamos!
 
+## npm init -y
+**Altereções depois do package.json criado.**
 {
 "name": "backend_api_node_mongo_jwt",
-//aqui no version lê se da direita para a esquerda.
-//Zero mais a direita significa correção de bugs
-//Zero do meio: siginifica novas implementações
-//Primeiro digito a esquerda: significa atualizações drásticas.
+*//aqui no version lê se da direita para a esquerda.*
+*//Zero mais a direita significa correção de bugs*
+*//Zero do meio: significa novas implementações*
+*//Primeiro digito a esquerda: significa atualizações drásticas.*
 "version": "1.0.0",
 "description": "Mais uma api JWT",
 "main": "server.js",
-"type": "module", //adicionar o que vai usar
+"type": "module", *//adicionar o que vai usar: require("common.js") ou import/export("module").*
 "scripts": {
-"start": "nodemon server.js",
+*//Esse script foi adicionado manualmente para a utilização do nodemon, que atualiza o servidor toda vez que faço alterações no código.*
+"start": "nodemon server.js", 
 "test": "echo \"Error: no test specified\" && exit 1"
 },
+*//Palavras chaves que são usadas para encontrar esse código.*
 "keywords": [mongodb, JWT, nodejs],
 "author": "Christiano Quintela programador christianoquintela@gmail.com",
 "license": "ISC"
@@ -60,3 +70,8 @@ Services: Toda a lógica do servidor(checagem antes de salvar no servidor).
 5. Models devolve por Services;
 6. Services manda para o Controller;
 7. Controller manda de volta para o front; (Ufa!!!)
+
+## Async/await - promise - callback
+### try/catch - then/catch
+
+- Utilizando os conhecimentos acima mostrados estou aprendendo e refatorando este projeto.

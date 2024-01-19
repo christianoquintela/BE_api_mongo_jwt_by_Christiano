@@ -1,5 +1,5 @@
 import { todos, criar, deletar } from '../services/userService.js';
-
+//Finalizado.
 const getAll = (req, res) => {
   // const listUsers =
   todos()
@@ -14,7 +14,7 @@ const getAll = (req, res) => {
       console.log(err);
     });
 };
-
+//Finalizado.
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -39,7 +39,7 @@ const createUser = async (req, res) => {
       console.log(err);
     });
 };
-
+//Inicializando a implementação.
 const deleteUser = (req, res) => {
   const { id } = req.params;
   // console.log('userControler id:' + id);

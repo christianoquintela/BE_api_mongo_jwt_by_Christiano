@@ -6,6 +6,7 @@ import mongoose from './mongoConnection.js';
 import User from './user.js';
 
 //GETTER getAll -> busca por todos os usuários cadastrados em nosso banco de dados mongo.
+//Implementação buscar todas as ocorrências no mongoDB utilizando a documentação, realizada com sucesso!
 const getAllM = async () => {
   /* 
   Estudando como retornar um objeto de um async/await, promises e callback's, pra retornar o obj.
@@ -51,19 +52,18 @@ const getAllM = async () => {
     });
     */
 };
-
+//Implementação do insert no mongoDB utilizando a documentação, realizada com sucesso!
 const newUser = async (name, email, password) => {
   return User.create({ name: name, email: email, password: password })
     .then((result) => {
-      console.log('Insert sucess');
-      // console.log('Resultado do sucesso ao crear novo usuario: ' + result);
+      console.log('Insert sucess');      
       return result;
     })
     .catch((err) => {
       console.log(err);
     });
 };
-
+//Implementação de verificação através do email e retornando o id, feita com sucesso!
 const userExists = async (email) => {
   return User.exists({ email: email })
     .then((result) => {
@@ -73,8 +73,10 @@ const userExists = async (email) => {
       console.error(err);
     });
 };
-
-const deleteUser = async (id) => {};
+//Iniciando a implementação do deletando Uma ocorrência através do ID.
+const deleteUser = async (id) => {
+  
+};
 
 const updateUser = async (id, email, password) => {};
 
