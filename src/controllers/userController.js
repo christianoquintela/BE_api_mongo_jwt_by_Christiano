@@ -1,25 +1,43 @@
 import { todos, criar, deletar } from '../services/userService.js';
 
 const getAll = (req, res) => {
-  todos();
-
-  return res.status(200).json({
-    erro: false,
-    msg: 'Lista de todos os usuários cadastrados no MongoDB.',
-  });
+  // const listUsers =
+  todos()
+    .then((resp) => {
+      return res.status(200).json({
+        erro: false,
+        msg: 'Acho que funfou! ',
+        resp,
+      });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
-const createUser = (req, res) => {
-  const { email, password } = req.body;
+const createUser = async (req, res) => {
+  const { name, email, password } = req.body;
 
-  const user = criar(email, password);
-
-  return res.status(200).json({
-    erro: false,
-    msg: 'usuário criado com sucesso.',
-    id: user._id,
-    email: user.email,
-  });
+  criar(name, email, password)
+    .then((result) => {
+      if (result.cad === true) {
+        return res.status(200).json({
+          erro: false,
+          msg: result.msg,
+          id: result.id,
+        });
+      } else {
+        return res.status(200).json({
+          erro: false,
+          name: result.name,
+          email: result.email,
+          id: result.id,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 const deleteUser = (req, res) => {

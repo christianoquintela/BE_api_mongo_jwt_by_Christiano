@@ -6,25 +6,54 @@ import {
 } from '../models/userModels.js';
 
 //Buscando todos os usuários no banco de dados.
-const todos = () => {
-  getAllM();
-  
+const todos = async () => {
+  return getAllM()
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
 
 //Criando usuários
-const criar = (email, password ) => {
-  const usuario = userExists( email );
+const criar = async (name, email, password) => {
+  return userExists(email)
+    .then((result) => {
+      try {
+        // console.log('dentro do try catch: ' + result._id);
+        if (result !== null)
+          return { cad: true, msg: 'Usuário já cadastrado', id: result._id };
 
-  if (usuario) return usuario;
+        return newUser(name, email, password)
+          .then((result) => {
+            return {
+              cad: false,
+              name: result.name,
+              email: result.email,
+              id: result._id,
+            };
+          })
+          .catch((err) => console.log(err));
+      } catch (error) {
+        console.log(error);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-  const user = newUser(email, password );
+  // console.log(teste);
 
-  return user;
+  // if (trueORfalse) return trueORfalse;
+  //o inserir esta ok, agora é validar o check
+  // const user = newUser(name, email, password);
+  // console.log(user);
 };
 
-const deletar =  (id ) => {
+const deletar = (id) => {
   const email = null;
-  const usuario = userExists(email,id);
+  const usuario = userExists(email, id);
   console.log(usuario);
 
   if (!usuario) {
