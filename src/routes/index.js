@@ -5,9 +5,11 @@ import express from 'express';
 const routes = express.Router();
 
 import {
+  getOne,
   getAll,
   createUser,
   deleteUser,
+  deleteAllUsers,
 } from '../controllers/userController.js';
 
 routes.get('/', (req, res) => {
@@ -16,11 +18,15 @@ routes.get('/', (req, res) => {
     msg: 'Bem vindo a routes no endpoint /',
   });
 });
-
-routes.get('/usuario', getAll);
-
-routes.post('/usuario', createUser);
-
-routes.delete('/usuario/:id', deleteUser);
+//Get todos os usuários cadastrados no banco de dados mongoDB Atlas.
+routes.get('/user', getAll);
+//Implementar o buscar por um usuário específico.
+routes.get('/user/:id',getOne);
+//Insert um user ao banco de dados.
+routes.post('/user', createUser);
+//Implementando o deleteOne
+routes.delete('/user/:id', deleteUser);
+//implementar o delete all
+routes.delete('/user', deleteAllUsers)
 
 export default routes;

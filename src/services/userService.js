@@ -17,7 +17,8 @@ const todos = async () => {
 };
 //Criando usuários - Finalizado.
 const criar = async (name, email, password) => {
-  return userExists(email)
+  const id = null;
+  return userExists(id, email)
     .then((result) => {
       try {
         // console.log('dentro do try catch: ' + result._id);
@@ -53,20 +54,32 @@ const criar = async (name, email, password) => {
 /* 
 Iniciar a implementação do delete conforme documentação mongoose.
 */
-const deletar = (id) => {
-  const email = null;
-  const usuario = userExists(email, id);
-  console.log(usuario);
+const deletar = async (id, email) => {
+  return userExists(id, email)
+    .then((result) => {
+      if (result === null) {
+        return {
+          erro: true,
+          msg: 'User not found.',
+        };
+      } else {
+        return deleteUser(id)
+          .then((result) => {
+            return {
+              erro: false,
+              msg: result,
+            };
+          })
+          .catch((err) => console.log(err));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-  if (!usuario) {
-    return {
-      erro: true,
-      msg: 'User not found.',
-    };
-  }
   // console.log('Service delete, id: ' + id);
-  const deletedId = deleteUser(id);
-  return deletedId;
+  // const deletedId = deleteUser(id);
+  // return;
 };
 
 export { todos, criar, deletar };

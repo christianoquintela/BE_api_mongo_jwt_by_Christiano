@@ -56,7 +56,7 @@ const getAllM = async () => {
 const newUser = async (name, email, password) => {
   return User.create({ name: name, email: email, password: password })
     .then((result) => {
-      console.log('Insert sucess');      
+      console.log('Insert sucess');
       return result;
     })
     .catch((err) => {
@@ -64,18 +64,38 @@ const newUser = async (name, email, password) => {
     });
 };
 //Implementação de verificação através do email e retornando o id, feita com sucesso!
-const userExists = async (email) => {
-  return User.exists({ email: email })
+const userExists = async (id, email) => {
+  if (id !== null) {
+    //Ao utilizar o exists retorna o valor do id ou retorna null.
+    return User.exists({ _id: id })
+      .then((res_id) => {
+        return res_id;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else if (email !== null) {
+    //Ao utilizar o exists retorna o valor do id ou retorna null.
+    return User.exists({ email: email })
+      .then((res_id) => {
+        return res_id;
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } else {
+    return { erro: true, msg: 'Email ou Id incorretos.' };
+  }
+};
+//Iniciando a implementação do deletando Uma ocorrência através do ID.
+const deleteUser = async (id) => {
+  return User.deleteOne({ _id: id })
     .then((result) => {
       return result;
     })
     .catch((err) => {
-      console.error(err);
+      console.log(err);
     });
-};
-//Iniciando a implementação do deletando Uma ocorrência através do ID.
-const deleteUser = async (id) => {
-  
 };
 
 const updateUser = async (id, email, password) => {};

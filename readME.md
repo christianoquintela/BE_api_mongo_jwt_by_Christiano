@@ -1,29 +1,33 @@
 # Aprendendo mais coisas do universo DEV.
+
 projeto iniciado através de tutorial no youtube, contudo devido a algumas divergências
-de entendimento e mudanças na syntax do mongoose, decidi refatorar e fazer as 
+de entendimento e mudanças na syntax do mongoose, decidi refatorar e fazer as
 mudanças de acordo com meu entendimento da documentação oficial.
-Qualquer erro de lógica, má implementação ou uso errado dos conceitos, fiquem a 
+Qualquer erro de lógica, má implementação ou uso errado dos conceitos, fiquem a
 vontade para sugerir alterações!!!
 Vamos que vamos!
 
 ## npm init -y
+
 **Altereções depois do package.json criado.**
 {
 "name": "backend_api_node_mongo_jwt",
-*//aqui no version lê se da direita para a esquerda.*
-*//Zero mais a direita significa correção de bugs*
-*//Zero do meio: significa novas implementações*
-*//Primeiro digito a esquerda: significa atualizações drásticas.*
+_//aqui no version lê se da direita para a esquerda._
+_//Zero mais a direita significa correção de bugs_
+_//Zero do meio: significa novas implementações_
+_//Primeiro digito a esquerda: significa atualizações drásticas._
 "version": "1.0.0",
 "description": "Mais uma api JWT",
 "main": "server.js",
-"type": "module", *//adicionar o que vai usar: require("common.js") ou import/export("module").*
+"type": "module", _//adicionar o que vai usar: require("common.js") ou import/export("module")._
 "scripts": {
-*//Esse script foi adicionado manualmente para a utilização do nodemon, que atualiza o servidor toda vez que faço alterações no código.*
-"start": "nodemon server.js", 
+_//Esse script foi adicionado manualmente para a utilização do nodemon, que atualiza o servidor toda vez que faço alterações no código._
+"start": "nodemon server.js",
 "test": "echo \"Error: no test specified\" && exit 1"
+_//Novo aprendizado: utilizando o script abaixo, agora é possível utilizar a variável de ambiente no javascript_
+"dev":"js watch --env-file .env src/server.js"*//verificar se é aplicável ao contexto que estou trabalhando*
 },
-*//Palavras chaves que são usadas para encontrar esse código.*
+_//Palavras chaves que são usadas para encontrar esse código._
 "keywords": [mongodb, JWT, nodejs],
 "author": "Christiano Quintela programador christianoquintela@gmail.com",
 "license": "ISC"
@@ -61,6 +65,7 @@ Services: Toda a lógica do servidor(checagem antes de salvar no servidor).
   BE -> Back-end.
 
 - Design patterns _MSC(model service controller)_
+- Design patterns _MVC(model view controller)_
 
 1. FE. envia a requisição para o BE.
 
@@ -72,6 +77,7 @@ Services: Toda a lógica do servidor(checagem antes de salvar no servidor).
 7. Controller manda de volta para o front; (Ufa!!!)
 
 ## Async/await - promise - callback
+
 ### try/catch - then/catch
 
 - Utilizando os conhecimentos acima mostrados estou aprendendo e refatorando este projeto.

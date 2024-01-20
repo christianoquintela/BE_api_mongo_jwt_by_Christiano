@@ -1,5 +1,5 @@
 {
-  "name": "backend_api_node_mongo_jwt",
+  "name": "be_api_mongodb_jwt_by_christiano",
   "version": "1.0.0",
   "description": "Mais uma api JWT + Mngodb_Atlas + Nodejs",
   "main": "src/server.js",

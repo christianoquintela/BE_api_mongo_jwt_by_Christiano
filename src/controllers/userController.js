@@ -1,4 +1,6 @@
 import { todos, criar, deletar } from '../services/userService.js';
+//Implementar...
+const getOne = (req, res) => {};
 //Finalizado.
 const getAll = (req, res) => {
   // const listUsers =
@@ -40,14 +42,31 @@ const createUser = async (req, res) => {
     });
 };
 //Inicializando a implementação.
-const deleteUser = (req, res) => {
+const deleteUser = async (req, res) => {
   const { id } = req.params;
-  // console.log('userControler id:' + id);
-  const idDeletado = deletar(id);
-  return res.status(200).json({
-    erro: false,
-    msg: `Deletado com sucesso o _id:${idDeletado}.`,
-  });
+  const email = null;
+  deletar(id, email)
+    .then((result) => {
+      if (result.erro === true) {
+        //Res se o id não foi encontrado
+        res.status(404).json({
+          erro: true,
+          msg: result.msg,
+        });
+      }
+      if (result.erro === false) {
+        res.status(200).json({
+          erro: false,
+          msg: 'Mensagem abaixo é o retorno que o mongo mostra ao deletar um cadastro.',
+          confirmDelete: result.msg,
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
+//implementar... Don't Keep calm, Run away, it is a Danger zone!
+const deleteAllUsers = (req, res) => {};
 
-export { getAll, createUser, deleteUser };
+export { getOne, getAll, createUser, deleteUser, deleteAllUsers };
