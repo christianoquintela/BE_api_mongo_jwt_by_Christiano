@@ -1,8 +1,8 @@
 # Aprendendo mais coisas do universo DEV.
 
-projeto iniciado através de tutorial no youtube, contudo devido a algumas divergências
+Projeto iniciado através de tutorial no youtube, contudo devido a algumas divergências
 de entendimento e mudanças na syntax do mongoose, decidi refatorar e fazer as
-mudanças de acordo com meu entendimento da documentação oficial.
+mudanças de acordo com meu entendimento da documentação oficial Mongoose/MongoDB.
 Qualquer erro de lógica, má implementação ou uso errado dos conceitos, fiquem a
 vontade para sugerir alterações!!!
 Vamos que vamos!
@@ -11,8 +11,8 @@ Vamos que vamos!
 
 **Altereções depois do package.json criado.**
 {
-"name": "backend_api_node_mongo_jwt",
-_//aqui no version lê se da direita para a esquerda._
+"name": "backend*api_node_mongo_jwt",
+*//aqui no version lê se da direita para a esquerda.\_
 _//Zero mais a direita significa correção de bugs_
 _//Zero do meio: significa novas implementações_
 _//Primeiro digito a esquerda: significa atualizações drásticas._
@@ -25,7 +25,7 @@ _//Esse script foi adicionado manualmente para a utilização do nodemon, que at
 "start": "nodemon server.js",
 "test": "echo \"Error: no test specified\" && exit 1"
 _//Novo aprendizado: utilizando o script abaixo, agora é possível utilizar a variável de ambiente no javascript_
-"dev":"js watch --env-file .env src/server.js"*//verificar se é aplicável ao contexto que estou trabalhando*
+"dev":"js watch --env-file .env src/server.js"_//verificar se é aplicável ao contexto que estou trabalhando_
 },
 _//Palavras chaves que são usadas para encontrar esse código._
 "keywords": [mongodb, JWT, nodejs],
@@ -36,35 +36,35 @@ _//Palavras chaves que são usadas para encontrar esse código._
 npm i express bcrypt jsonwebtoken --save | -S
 npm i nodemon dotenv --save-dev -S -D
 
-Explicação da estrutura de pastas:
-Controllers: Entradas e saídas das requisições http
+#### Explicação da estrutura de pastas:
 
-Model: interação com o mongoDB
+**Routes:** rotas das requisições.
 
-Routes: rotas das requisições
+**Controllers:** Entradas e saídas das requisições http.
 
-Services: Toda a lógica do servidor(checagem antes de salvar no servidor).
+**Services:** Toda a lógica do servidor(checagens e validações antes de enviar para o model).
 
-# manim
+**Model:** Interação com o mongoDB(CRUD).
 
-( # Tenha em mente ao fazer suas api's;
+# Manim
 
-## Sequência para lidar com as requisições:
+## Tenha em mente ao fazer suas api's;
 
-1. Camada para lidar com as req's **(transporte)**
-2. Camada para lidar com a lógica **(service)**
-3. Camada para lidar com persistência **(storage)**
+### Sequência para lidar com as requisições:
+
+1. Camada para lidar com as req's: **(Transporte)** _(Controllers)_
+2. Camada para lidar com a lógica: **(Service)** _(Services)_
+3. Camada para lidar com persistência: **(Storage)** _(Models)_
    fluxo de exemplo;
-   req -> express.handler() -> service.adicionarNomeAoUsuario -> storage.salvarUser()
-   )
-
-> MSC(controller -> services -> models)
+   req -> express.handler() -> service.adicionarNomeAoUsuário -> storage.salvarUser()
 
 - Legend
   FE -> Front-end.
   BE -> Back-end.
 
-- Design patterns _MSC(model service controller)_
+> MSC(model -> service -> controller)
+> CSM(controller -> services -> models)
+
 - Design patterns _MVC(model view controller)_
 
 1. FE. envia a requisição para o BE.
