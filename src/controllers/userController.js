@@ -1,5 +1,7 @@
+//Importações
 import { buscaUm, todos, criar, deletar } from '../services/userService.js';
-//Implementar...
+
+//Finalizado.
 const getOne = (req, res) => {
   const id = req.params.id;
   buscaUm(id)
@@ -60,7 +62,7 @@ const createUser = async (req, res) => {
       console.log(err);
     });
 };
-//Inicializando a implementação.
+//Finalizado.
 const deleteUser = async (req, res) => {
   const { id } = req.params;
   const email = null;
@@ -89,4 +91,5 @@ const deleteUser = async (req, res) => {
 //implementar... Don't Keep calm, Run away, it is a Danger zone!
 const deleteAllUsers = (req, res) => {};
 
+//Exportações
 export { getOne, getAll, createUser, deleteUser, deleteAllUsers };

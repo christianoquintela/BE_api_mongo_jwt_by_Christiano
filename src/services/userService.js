@@ -1,3 +1,4 @@
+//Importações
 import {
   getById,
   getAllM,
@@ -5,7 +6,8 @@ import {
   userExists,
   deleteUser,
 } from '../models/userModels.js';
-//Buscando um cadastro pelo ID.
+
+//Buscando um cadastro pelo ID, //Finalizado.
 const buscaUm = async (id) => {
   const email = null;
   return userExists(id, email)
@@ -27,7 +29,6 @@ const buscaUm = async (id) => {
       console.log(err);
     });
 };
-
 //Buscando todos os usuários no banco de dados. Finalizado.
 const todos = async () => {
   return getAllM()
@@ -73,9 +74,8 @@ const criar = async (name, email, password) => {
   // const user = newUser(name, email, password);
   // console.log(user);
 };
-
 /* 
-Iniciar a implementação do delete conforme documentação mongoose.
+Implementação do delete conforme documentação mongoose realizada com sucesso!, Finalizado.
 */
 const deletar = async (id, email) => {
   return userExists(id, email)
@@ -105,4 +105,7 @@ const deletar = async (id, email) => {
   // return;
 };
 
-export { buscaUm, todos, criar, deletar };
+const atualizar = async () =>{}
+
+//Exportações
+export { buscaUm, todos, criar, deletar, atualizar };

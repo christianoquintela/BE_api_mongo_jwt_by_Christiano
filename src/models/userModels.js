@@ -5,15 +5,18 @@ import mongoose from './mongoConnection.js';
 //Criei um usuário User com o mesmo modelo do db
 import User from './user.js';
 
+//Busca um cadastro na base de dados utilizando o ID, terminada com sucesso!
 const getById = async (id) => {
   //'-password' é uma option
-return User.findById(id ,'-password').exec().then((result)=>{
-  return result;
-}).catch((err)=>console.log(err));
+  return User.findById(id, '-password')
+    .exec()
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => console.log(err));
 };
-
 //GETTER getAll -> busca por todos os usuários cadastrados em nosso banco de dados mongo.
-//Implementação buscar todas as ocorrências no mongoDB utilizando a documentação, realizada com sucesso!
+//Implementação buscar todas as ocorrências no mongoDB utilizando a documentação, finalizada com sucesso!
 const getAllM = async () => {
   /* 
   Estudando como retornar um objeto de um async/await, promises e callback's, pra retornar o obj.
@@ -94,7 +97,7 @@ const userExists = async (id, email) => {
     return { erro: true, msg: 'Email ou Id incorretos.' };
   }
 };
-//Iniciando a implementação do deletando Uma ocorrência através do ID.
+//Iniciando a implementação do deletando Uma ocorrência através do ID, concluído com sucesso!
 const deleteUser = async (id) => {
   return User.deleteOne({ _id: id })
     .then((result) => {
@@ -105,6 +108,7 @@ const deleteUser = async (id) => {
     });
 };
 
-const updateUser = async (id, email, password) => {};
+const updateUser = async (id, name, email, password) => {};
 
+//Exportações
 export { getById, getAllM, newUser, userExists, deleteUser, updateUser };
