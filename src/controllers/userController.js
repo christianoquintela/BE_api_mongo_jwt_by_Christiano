@@ -1,5 +1,11 @@
 //Importações
-import { buscaUm, todos, criar, deletar } from '../services/userService.js';
+import {
+  buscaUm,
+  todos,
+  criar,
+  deletar,
+  atualizar,
+} from '../services/userService.js';
 
 //Finalizado.
 const getOne = (req, res) => {
@@ -88,8 +94,34 @@ const deleteUser = async (req, res) => {
       console.log(err);
     });
 };
-//implementar... Don't Keep calm, Run away, it is a Danger zone!
-const deleteAllUsers = (req, res) => {};
+
+//Implementar agora 20 jan 2024 14:44.
+
+/*
+Call(in service) atualizar(id, name, email) -> verifica a existência call(in service exists) retorna: true continua,
+false retorna: "user not found" -> call(in model updateUser) faz a query do mongo de update(usaremos o findByIdAndUpdate(id,update))
+    */
+const updateUser = async (req, res) => {
+  const { name, email } = req.body;
+  const id = req.params.id;
+  atualizar(id, name, email)
+    .then((result) => {
+      if (result.erro === true) {
+        res.status(404).json({
+          erro: result.erro,
+          msg: result.msg,
+        });
+      } else {
+        res.status(200).json({
+          msg: 'Atualizado com sucesso!',
+          id: result._id,
+          name: `Antes da atualização: ${result.name}`,
+          email: `Antes da atualização: ${result.email}`,
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+};
 
 //Exportações
-export { getOne, getAll, createUser, deleteUser, deleteAllUsers };
+export { getOne, getAll, createUser, deleteUser, updateUser };

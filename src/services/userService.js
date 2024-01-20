@@ -5,6 +5,7 @@ import {
   newUser,
   userExists,
   deleteUser,
+  updateUser,
 } from '../models/userModels.js';
 
 //Buscando um cadastro pelo ID, //Finalizado.
@@ -45,7 +46,6 @@ const criar = async (name, email, password) => {
   return userExists(id, email)
     .then((result) => {
       try {
-        // console.log('dentro do try catch: ' + result._id);
         if (result !== null)
           return { cad: true, msg: 'Usuário já cadastrado', id: result._id };
 
@@ -66,13 +66,6 @@ const criar = async (name, email, password) => {
     .catch((err) => {
       console.log(err);
     });
-
-  // console.log(teste);
-
-  // if (trueORfalse) return trueORfalse;
-  //o inserir esta ok, agora é validar o check
-  // const user = newUser(name, email, password);
-  // console.log(user);
 };
 /* 
 Implementação do delete conforme documentação mongoose realizada com sucesso!, Finalizado.
@@ -99,13 +92,27 @@ const deletar = async (id, email) => {
     .catch((err) => {
       console.log(err);
     });
-
-  // console.log('Service delete, id: ' + id);
-  // const deletedId = deleteUser(id);
-  // return;
 };
-
-const atualizar = async () =>{}
+//Implementar atualizar
+/*
+Verifica a existência call(in service exists) retorna: true continua,
+false retorna: "user not found"; else -> call(in model updateUser) faz a query do mongo de update(usaremos o findByIdAndUpdate(id,update))
+    */
+const atualizar = async (id, name, email) => {
+  return userExists(id, email)
+    .then((result) => {
+      if (result === null) {
+        return { erro: true, msg: 'User not found.' };
+      } else {
+        return updateUser(id, name, email)
+          .then((result) => {
+            return result;
+          })
+          .catch((err) => console.log(err));
+      }
+    })
+    .catch((err) => console.log(err));
+};
 
 //Exportações
 export { buscaUm, todos, criar, deletar, atualizar };

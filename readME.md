@@ -82,6 +82,9 @@ npm i nodemon dotenv --save-dev -S -D
 
 - Utilizando os conhecimentos acima mostrados estou aprendendo e refatorando este projeto.
 
-CRUD almost completed.
+CRUD completed.
 
-Go go implements UPDATE.
+Todos os comandos utilizados no Model's:
+Link: https://mongoosejs.com/docs/api/model.html
+
+# Partiu a implementação do JWT + Bcrypt

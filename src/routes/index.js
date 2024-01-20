@@ -9,7 +9,7 @@ import {
   getAll,
   createUser,
   deleteUser,
-  deleteAllUsers,
+  updateUser,
 } from '../controllers/userController.js';
 
 routes.get('/', (req, res) => {
@@ -21,12 +21,12 @@ routes.get('/', (req, res) => {
 //Get todos os usuários cadastrados no banco de dados mongoDB Atlas.
 routes.get('/user', getAll);
 //Implementar o buscar por um usuário específico.
-routes.get('/user/:id',getOne);
-//Insert um user ao banco de dados.
+routes.get('/user/:id', getOne);
+//Insert as createUser.
 routes.post('/user', createUser);
-//Implementando o deleteOne
+//Delete as deleteOne
 routes.delete('/user/:id', deleteUser);
-//implementar o delete all
-routes.delete('/user', deleteAllUsers)
+//Put as updateUser
+routes.put('/user/:id', updateUser);
 
 export default routes;
