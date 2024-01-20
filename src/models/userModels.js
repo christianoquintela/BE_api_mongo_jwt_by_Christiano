@@ -5,6 +5,13 @@ import mongoose from './mongoConnection.js';
 //Criei um usuário User com o mesmo modelo do db
 import User from './user.js';
 
+const getById = async (id) => {
+  //'-password' é uma option
+return User.findById(id ,'-password').exec().then((result)=>{
+  return result;
+}).catch((err)=>console.log(err));
+};
+
 //GETTER getAll -> busca por todos os usuários cadastrados em nosso banco de dados mongo.
 //Implementação buscar todas as ocorrências no mongoDB utilizando a documentação, realizada com sucesso!
 const getAllM = async () => {
@@ -100,4 +107,4 @@ const deleteUser = async (id) => {
 
 const updateUser = async (id, email, password) => {};
 
-export { getAllM, newUser, userExists, deleteUser, updateUser };
+export { getById, getAllM, newUser, userExists, deleteUser, updateUser };

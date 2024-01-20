@@ -1,9 +1,32 @@
 import {
+  getById,
   getAllM,
   newUser,
   userExists,
   deleteUser,
 } from '../models/userModels.js';
+//Buscando um cadastro pelo ID.
+const buscaUm = async (id) => {
+  const email = null;
+  return userExists(id, email)
+    .then((result) => {
+      if (result === null) {
+        return {
+          erro: true,
+          msg: 'User not found.',
+        };
+      } else {
+        return getById(id)
+          .then((result) => {
+            return result;
+          })
+          .catch((err) => console.log(err));
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
 //Buscando todos os usuários no banco de dados. Finalizado.
 const todos = async () => {
@@ -82,4 +105,4 @@ const deletar = async (id, email) => {
   // return;
 };
 
-export { todos, criar, deletar };
+export { buscaUm, todos, criar, deletar };

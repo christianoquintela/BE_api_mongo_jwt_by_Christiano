@@ -1,6 +1,25 @@
-import { todos, criar, deletar } from '../services/userService.js';
+import { buscaUm, todos, criar, deletar } from '../services/userService.js';
 //Implementar...
-const getOne = (req, res) => {};
+const getOne = (req, res) => {
+  const id = req.params.id;
+  buscaUm(id)
+    .then((result) => {
+      if (result.erro === true) {
+        //Res se o id não foi encontrado
+        res.status(404).json({
+          erro: true,
+          msg: result.msg,
+        });
+      } else {
+        //Res de sucesso!
+        res.status(200).json({
+          erro: false,
+          msg: result,
+        });
+      }
+    })
+    .catch((err) => console.log(err));
+};
 //Finalizado.
 const getAll = (req, res) => {
   // const listUsers =
@@ -55,6 +74,7 @@ const deleteUser = async (req, res) => {
         });
       }
       if (result.erro === false) {
+        //Res de sucesso!
         res.status(200).json({
           erro: false,
           msg: 'Mensagem abaixo é o retorno que o mongo mostra ao deletar um cadastro.',

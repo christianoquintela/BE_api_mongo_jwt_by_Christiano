@@ -81,3 +81,7 @@ npm i nodemon dotenv --save-dev -S -D
 ### try/catch - then/catch
 
 - Utilizando os conhecimentos acima mostrados estou aprendendo e refatorando este projeto.
+
+CRUD almost completed.
+
+Go go implements UPDATE.
