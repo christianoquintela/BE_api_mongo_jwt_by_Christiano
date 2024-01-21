@@ -2,6 +2,7 @@
 
 //Conexão como o mongoDB atlas cloud
 import mongoose from './mongoConnection.js';
+import jwt from 'jsonwebtoken';
 //Criei um usuário User com o mesmo modelo do db
 import User from './user.js';
 
@@ -15,9 +16,9 @@ const getById = async (id) => {
     })
     .catch((err) => console.log(err));
 };
-//GETTER getAll -> busca por todos os usuários cadastrados em nosso banco de dados mongo.
-//Implementação buscar todas as ocorrências no mongoDB utilizando a documentação, finalizada com sucesso!
 /* 
+GETTER getAll -> busca por todos os usuários cadastrados em nosso banco de dados mongo.
+Implementação buscar todas as ocorrências no mongoDB utilizando a documentação, finalizada com sucesso!
 Estudando como retornar um objeto de um callback's, promises e async/await e pra retornar o obj.
 Link sobre: https://www.youtube.com/watch?v=7Bs4-rqbCQc&ab_channel=DevPleno
 Faz a busca no mongo usando O "Model: User" e o método find;
@@ -86,8 +87,8 @@ const deleteUser = async (id) => {
       console.log(err);
     });
 };
-//Implementar o update, finalizado com sucesso!
 /*
+Implementar o update, finalizado com sucesso!
 Call(in model updateUser) faz a query do mongo de update(usaremos o findByIdAndUpdate(id,update))
 */
 const updateUser = async (id, name, email) => {
@@ -98,5 +99,87 @@ const updateUser = async (id, name, email) => {
     .catch((err) => console.log(err));
 };
 
+/*
+A função requestLogin é responsável por criar a autorização, depois de buscar no DB
+a confirmação da existência do usuário, então utilizamos ali no else o JWT.SIGN para
+criar o token, composto de header, payload e signature.
+*/
+
+const requestLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  login(email, password)
+    .then((result) => {
+      if (result === null) {
+        res.status(400).json({ erro: true, result });
+      } else {
+        const id = result._id;
+        const newToken = jwt.sign(
+          /*
+Header:
+O header especifica se o token será assinado, e caso seja qual o algoritmo usado para a assinatura usando a
+  declaração obrigatória alg (algoritmo). Além disso pode conter as declarações opcionais typ (tipo de mídia)
+  e cty (tipo de conteúdo).
+*/
+          {
+            alg: 'HS256',
+            typ: 'JWT',
+          },
+          /*
+          Payload:
+          O payload pode conter qualquer tipo de dado relevante para a aplicação, não existem declarações obrigatórias.
+          */
+          {
+            userId: id,
+            email: email,
+          },
+          //Secret que neste caso esta salvo em arquivo .env
+          process.env.secret,
+          //Options
+          { expiresIn: 43200 }
+          /*
+          A assinatura consiste da codificação e encriptação do header, payload e um segredo. Esse campo é usado para
+           provar a autenticidade de um token, prevenindo que ele possa ser modificado por um agente malicioso.
+            As declarações registradas para a assinatura são:
+
+            iss (issuer) quem criou o token;
+            sub (subject) sobre quem o token se refere;
+            aud (audience) para quem o token é esperado;
+            exp (expiration) data de expiração;
+            nbf (not before) a partir de quando o token é valido;
+            iat (issued at) data de criação;
+            jti (jwt id) identificador único;
+            A assinatura é verificada pela aplicação que deseja validar a autenticidade do token.
+            Se o token for assinado com criptografia assimétrica, a chave pública pode ser 
+            obtida através de uma API que fornece tal chave no formato de uma JWK.
+          */
+        );
+        res.status(200).json({ erro: false, token: newToken });
+      }
+    })
+    .catch((err) => console.log(err));
+};
+
+/* 
+A função login é para verificar(autenticar) se existe um cadastro de 
+usuário cujos valores de email(ou nome de usuário no futuro) e password existem 
+no banco dados, assim fazemos a consulta e será retornado true or false.
+*/
+const login = async (email, password) => {
+  return User.findOne({ email, password })
+    .exec()
+    .then((result) => {
+      return result;
+    })
+    .catch((err) => console.log(err));
+};
 //Exportações
-export { getById, getAllM, newUser, userExists, deleteUser, updateUser };
+export {
+  getById,
+  getAllM,
+  newUser,
+  userExists,
+  deleteUser,
+  updateUser,
+  requestLogin,
+};
