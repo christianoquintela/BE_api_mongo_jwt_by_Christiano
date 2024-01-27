@@ -1,8 +1,6 @@
 # Aprendendo mais coisas do universo DEV.
 
-Projeto iniciado através de tutorial no youtube, contudo devido a algumas divergências
-de entendimento e mudanças na syntax do mongoose, decidi refatorar e fazer as
-mudanças de acordo com meu entendimento da documentação oficial Mongoose/MongoDB.
+Refatorar e fazer as mudanças de acordo com a documentação oficial Mongoose/MongoDB.
 Qualquer erro de lógica, má implementação ou uso errado dos conceitos, fiquem a
 vontade para sugerir alterações!!!
 Vamos que vamos!
@@ -52,7 +50,7 @@ npm i nodemon dotenv --save-dev -S -D
 
 ### Sequência para lidar com as requisições:
 
-1. Camada para lidar com as req's: **(Transporte)** _(Controllers)_
+1. Camada para lidar com as req's: **(Transporte)** _(Controllers/handlers)_
 2. Camada para lidar com a lógica: **(Service)** _(Services)_
 3. Camada para lidar com persistência: **(Storage)** _(Models)_
    fluxo de exemplo;
@@ -78,7 +76,7 @@ npm i nodemon dotenv --save-dev -S -D
 
 ## Async/await - promise - callback
 
-### try/catch - then/catch
+### try/catch - then/catch(Utilizei de forma errada, aprofundar e aprender a utilizar)
 
 - Utilizando os conhecimentos acima mostrados estou aprendendo e refatorando este projeto.
 
@@ -88,3 +86,37 @@ Todos os comandos utilizados no Model's:
 Link: https://mongoosejs.com/docs/api/model.html
 
 # Partiu a implementação do JWT + Bcrypt
+
+// Para cada domínio, é aconcelhado ter apenas os métodos;
+// Save, Delete, Filter
+export const save = async (user) => (user.id ? \_update(user) : \_save(user));
+const \_save = (user) => {
+resp = await connection.exec('insert...')
+
+user.id = resp.lastr_inserted_id
+}
+export const remove = async (ids = []) =>
+connect.exec('delete from user where id in ?', ids);
+export const filter = async (ids = [], emails = []) => {
+q = 'select \* frm user';
+args = [];
+where = [];
+
+if (ids) {
+aux = ids.map(() => '?').join(',');
+where.push(`id in (${aux})`);
+args.push(ids);
+}
+
+if (emails) {
+aux = emails.map(() => '?').join(',');
+where.push(`email in (${aux})`);
+args.push(emails);
+}
+
+if (where) {
+q += where.join(' and ');
+}
+const [result] = await connect.exec(q, args);
+return result;
+};

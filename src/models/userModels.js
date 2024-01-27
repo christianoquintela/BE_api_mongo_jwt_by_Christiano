@@ -5,6 +5,7 @@ import mongoose from './mongoConnection.js';
 import jwt from 'jsonwebtoken';
 //Criei um usuário User com o mesmo modelo do db
 import User from './user.js';
+import { connection } from 'mongoose';
 
 //Busca um cadastro na base de dados utilizando o ID, terminada com sucesso!
 const getById = async (id) => {
@@ -14,7 +15,7 @@ const getById = async (id) => {
     .then((result) => {
       return result;
     })
-    .catch((err) => console.log(err));
+    
 };
 /* 
 GETTER getAll -> busca por todos os usuários cadastrados em nosso banco de dados mongo.
@@ -38,9 +39,7 @@ const getAllM = async () => {
       }));
       return lista;
     })
-    .catch((err) => {
-      console.log(err);
-    });
+
 };
 //Implementação do insert no mongoDB utilizando a documentação, realizada com sucesso!
 const newUser = async (name, email, password) => {
@@ -49,10 +48,9 @@ const newUser = async (name, email, password) => {
       console.log('Insert success');
       return result;
     })
-    .catch((err) => {
-      console.log(err);
-    });
+
 };
+
 //Implementação de verificação através do email e retornando o id, feita com sucesso!
 const userExists = async (id, email) => {
   if ((id !== null && email !== null) || id !== null) {
@@ -61,18 +59,14 @@ const userExists = async (id, email) => {
       .then((res_id) => {
         return res_id;
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      
   } else if (email !== null) {
     //Ao utilizar o exists retorna o valor do id ou retorna null.
     return User.exists({ email: email })
       .then((res_id) => {
         return res_id;
       })
-      .catch((err) => {
-        console.error(err);
-      });
+      
   } else {
     return { erro: true, msg: 'Email ou Id incorretos.' };
   }
@@ -96,7 +90,7 @@ const updateUser = async (id, name, email) => {
     .then((result) => {
       return result;
     })
-    .catch((err) => console.log(err));
+    
 };
 
 /*
@@ -157,7 +151,7 @@ O header especifica se o token será assinado, e caso seja qual o algoritmo usad
         res.status(200).json({ erro: false, token: newToken });
       }
     })
-    .catch((err) => console.log(err));
+    
 };
 
 /* 
@@ -171,7 +165,7 @@ const login = async (email, password) => {
     .then((result) => {
       return result;
     })
-    .catch((err) => console.log(err));
+    
 };
 //Exportações
 export {

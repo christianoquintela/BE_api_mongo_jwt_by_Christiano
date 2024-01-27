@@ -8,7 +8,7 @@ import {
 } from '../services/userService.js';
 
 //Finalizado.
-const getOne = (req, res) => {
+const getOne = async (req, res) => {
   const id = req.params.id;
   buscaUm(id)
     .then((result) => {
@@ -26,10 +26,10 @@ const getOne = (req, res) => {
         });
       }
     })
-    .catch((err) => console.log(err));
+    
 };
 //Finalizado.
-const getAll = (req, res) => {
+const getAll = async (req, res) => {
   // const listUsers =
   todos()
     .then((resp) => {
@@ -39,9 +39,7 @@ const getAll = (req, res) => {
         resp,
       });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+
 };
 //Finalizado.
 const createUser = async (req, res) => {
@@ -64,9 +62,7 @@ const createUser = async (req, res) => {
         });
       }
     })
-    .catch((err) => {
-      console.log(err);
-    });
+  
 };
 //Finalizado.
 const deleteUser = async (req, res) => {
@@ -90,9 +86,7 @@ const deleteUser = async (req, res) => {
         });
       }
     })
-    .catch((err) => {
-      console.log(err);
-    });
+
 };
 
 //Implementar agora 20 jan 2024 14:44.
@@ -120,7 +114,7 @@ const updateUser = async (req, res) => {
         });
       }
     })
-    .catch((err) => console.log(err));
+    
 };
 
 //Exportações
